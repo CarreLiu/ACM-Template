@@ -1,8 +1,5 @@
 /**
- * 合数的分解需要先进行素数的筛选
- * factor[i][0]存放分解的素数
- * factor[i][1]存放对应素数出现的次数
- * fatCnt存放合数分解出的素数个数(相同的素数只算一次)
+ * 定义法
  */
 #include <iostream>
 #include <cstring>
@@ -13,13 +10,12 @@ int prime[MAXN+1];
 int factor[100][2];
 int fatCnt;
 
-//欧拉筛选法获取素数表
+//欧拉筛选法求素数表
 void getPrime()
 {
 	for (int i = 2; i <= MAXN; i++) {
-		if (!prime[i]) {
-			prime[++prime[0]] = i;	//prime[0]存放素数的个数
-		}
+		if (!prime[i])
+			prime[++prime[0]] = i;	//prime[0]存放的是素数的个数
 		for (int j = 1; j <= prime[0] && i * prime[j] <= MAXN; j++) {
 			prime[i * prime[j]] = 1;
 			if (!(i % prime[j]))
@@ -28,13 +24,12 @@ void getPrime()
 	}
 }
 
-//合数分解
-int getFactors(int x)
+//求当前输入的数的质因数
+int getFactor(int x)
 {
-	fatCnt = 0;
 	for (int i = 1; i <= prime[0] && prime[i] * prime[i] <= x; i++) {
 		if (!(x % prime[i])) {
-			factor[fatCnt][0] = prime[i];
+			factor[fatCnt][0] =  prime[i];
 			while (!(x % prime[i])) {
 				factor[fatCnt][1]++;
 				x /= prime[i];
@@ -57,11 +52,15 @@ int main()
 	getPrime();
 	int x;
 	while (cin >> x) {
+		fatCnt = 0;
 		memset(factor, 0, sizeof(factor));
-		int len = getFactors(x);
-		for (int i = 0; i < len; i++)
-			cout << factor[i][0] << " ";
-		cout << endl;
+		getFactor(x);
+		int res = x;
+		for (int i = 0; i < fatCnt; i++) {
+			res = res / factor[i][0] * (factor[i][0] - 1);	//欧拉函数的定义
+		}
+
+		cout << res << endl;
 	}
 
 	return 0;
