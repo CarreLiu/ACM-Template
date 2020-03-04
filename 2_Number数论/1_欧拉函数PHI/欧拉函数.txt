@@ -19,4 +19,4 @@
 	如果a mod b == 0 && b是质数，那么phi[a * b] = phi[a] * b
 	如果a mod b != 0 && b是质数(即a，b互质)，那么phi[a * b] = phi[a] * phi[b]
 	
-https://blog.csdn.net/Lytning/article/details/24432651?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+https://blog.csdn.net/Lytning/article/details/24432651
