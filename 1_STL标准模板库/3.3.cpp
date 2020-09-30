@@ -10,7 +10,7 @@ int main()
 	for (iter = s.begin(); iter != s.end(); iter++)
 		cout << *iter << " ";
 	cout << endl;
-	if ((iter = s.find(1)) != s.end())
+	if ((iter = s.find(3)) != s.end())
 		cout << *iter << endl;
 
 	return 0;
